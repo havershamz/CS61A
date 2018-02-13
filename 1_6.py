@@ -1,4 +1,4 @@
-"""power function"""
+#power function
 
 def pow(x, n):
 	product, k = 1, 0 
@@ -6,7 +6,7 @@ def pow(x, n):
 		product, k = product * x, k+1
 	return product
 
-"""root with newton update method"""
+#root with newton update method
 
 def find_zero(f, df):
 	def near_zero(x):
@@ -37,7 +37,7 @@ def root(a, n):
 	return find_zero(f, df)
 
 
-"""root with fixed update method"""
+#root with fixed update method
 
 def square_root_update(x, a):
 	return (x + a/x) / 2
@@ -64,7 +64,7 @@ def cube_root(a):
 	return improve(lambda x :cube_root_update(x, a),
 		lambda x :approx_eq(x*x*x, a))
 
-"""function as return value"""
+#function as return value
 
 def summation(n, term):
 	"""sum the first N terms of a sequence.
@@ -89,7 +89,7 @@ def make_adder(n):
 		return k + n
 	return adder	
 
-"""currying"""
+#currying
 
 def curry2(f):
 	def g(x):
@@ -108,19 +108,17 @@ def map_to_range(start, end, f):
  		print(f(start))
  		start = start + 1
 
-"""function decorators"""
+#function decorators
 def trace1(fn):
 	def wrapped(x):
 		print('->', fn, '(', x, ')')
 		return fn(x)
 	return wrapped
 
-"""
-rebindind to square = trace1(square)
-trace1 takes in a fn as operand, which makes function
-"wrapped" can operate it. print sth. and return sth. like 
-fn(x)
-"""
+#rebindind to square = trace1(square) 
+#trace1 takes in a fn as operand, which makes function
+#"wrapped" can operate it. print sth. and return sth. like 
+#fn(x)
 
 @trace1
 def square(x):
