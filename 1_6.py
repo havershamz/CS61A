@@ -1,5 +1,4 @@
 #power function
-
 def pow(x, n):
 	product, k = 1, 0 
 	while k < n:
@@ -7,7 +6,6 @@ def pow(x, n):
 	return product
 
 #root with newton update method
-
 def find_zero(f, df):
 	def near_zero(x):
 		return approx_eq(f(x), 0)
@@ -38,7 +36,6 @@ def root(a, n):
 
 
 #root with fixed update method
-
 def square_root_update(x, a):
 	return (x + a/x) / 2
 
@@ -65,7 +62,6 @@ def cube_root(a):
 		lambda x :approx_eq(x*x*x, a))
 
 #function as return value
-
 def summation(n, term):
 	"""sum the first N terms of a sequence.
 
@@ -90,7 +86,6 @@ def make_adder(n):
 	return adder	
 
 #currying
-
 def curry2(f):
 	def g(x):
 		def h(y):
@@ -129,3 +124,22 @@ def sum_square_up_to(n):
 	while k<=n:
 		total, k = total + square(k), k + 1
 	return total 
+
+#inverse
+def search(f):
+	x = 0
+	while not f(x):
+		x += 1
+	return x
+
+def inverse(f):
+	return lambda y: search(lambda x: f(x) == y)
+
+#self reference
+def print_sums(x):
+	print(x)
+	def next_sum(y):
+		return print_sums(x + y)
+	return next_sum
+
+
