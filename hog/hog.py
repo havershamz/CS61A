@@ -22,6 +22,13 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    k, temp, product = 1, False, 0
+    while k <= num_rolls:
+    	adder = dice()
+    	if adder == 1:
+    		temp = True
+    	k, product = k + 1, product + adder
+    return 1 if temp else product
     # END PROBLEM 1
 
 
@@ -33,6 +40,7 @@ def free_bacon(score):
     assert score < 100, 'The game should be over.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    return 2 + abs(score//10 -score%10)
     # END PROBLEM 2
 
 
@@ -51,6 +59,9 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if num_rolls == 0:
+    	return free_bacon(opponent_score)
+    return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
@@ -58,6 +69,9 @@ def is_swap(score0, score1):
     """Return whether one of the scores is an integer multiple of the other."""
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    if score0 > 1 and score1 > 1 and (score0 % score1 == 0 or score1 % score0 == 0):
+    	return True
+    return False
     # END PROBLEM 4
 
 
@@ -97,6 +111,16 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+    	if player:
+    		score1 += take_turn(strategy1(score1,score0), score0, dice)
+    	else:
+    		score0 += take_turn(strategy0(score0,score1), score1, dice)
+    	if is_swap(score0, score1):
+    		score0, score1 = score1, score0
+    	if score0 >= goal or score1 >= goal:
+    		return score0, score1
+    	player = other(player)
     # END PROBLEM 5
     return score0, score1
 
