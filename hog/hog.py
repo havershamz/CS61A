@@ -118,9 +118,9 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     		score0 += take_turn(strategy0(score0,score1), score1, dice)
     	if is_swap(score0, score1):
     		score0, score1 = score1, score0
-    	if score0 >= goal or score1 >= goal:
-    		return score0, score1
     	player = other(player)
+    	say = say(score0, score1)
+
     # END PROBLEM 5
     return score0, score1
 
@@ -196,6 +196,14 @@ def announce_highest(who, previous_high=0, previous_score=0):
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    def say(score0, score1):
+    	score = score1 if who else score0 
+    	gain = score - previous_score
+    	if gain > previous_high:
+    		print(str(gain) + " point" + ("" if gain == 1 else "s") + "! That's the biggest gain yet for Player " + str(who))
+    		return announce_highest(who, gain, score)
+    	return announce_highest(who, previous_high, score)
+    return say
     # END PROBLEM 7
 
 
