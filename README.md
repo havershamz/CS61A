@@ -1,2 +1,2 @@
-# py
-this is a cs61a learning projest
+# CS61A
+A CS61A learning project
